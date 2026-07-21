@@ -1,4 +1,3 @@
-Readme · MD
 # Infrastructure Design App
  
 An AI-powered web platform that lets developers design, document, and collaborate on software architecture in real time. Users describe a system in plain language, and the AI generates and refines architecture diagrams alongside the team on a shared canvas.
