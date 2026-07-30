@@ -96,4 +96,4 @@ This project is being built as part of a team software engineering internship. P
  
 ## License
  
-TBD
+GPL-3.0 license
