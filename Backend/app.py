@@ -14,7 +14,8 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
 
 socketio = SocketIO(app, cors_allowed_origins="*")
-#project presence and project designs are still in-memory for now when the redis will be ready we should remember to connect it for now is processing just one local project
+#project presence and project designs are still in-memory for now when the redis will be ready we should remember to
+#  connect it for now is processing just one local project
 project_presence = {}
 project_designs = {}
 
