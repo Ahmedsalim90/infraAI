@@ -1,19 +1,20 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import ReactFlow, {
   Background,
   Controls,
   MiniMap,
   applyNodeChanges,
   applyEdgeChanges,
+  useReactFlow,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
 
 import useDesignStore from '../store/designStore'
 import ServiceNode from './ServiceNode'
+import Palette from './Palette'
 
 const nodeTypes = { serviceNode: ServiceNode }
 
-// Hardcoded mock data matching the frozen schema — swap for real data from Pod C later
 const MOCK_NODES = [
   {
     id: 'node-1',
@@ -45,9 +46,12 @@ function Canvas() {
   const edges = useDesignStore((state) => state.edges)
   const setNodes = useDesignStore((state) => state.setNodes)
   const setEdges = useDesignStore((state) => state.setEdges)
+  const addNode = useDesignStore((state) => state.addNode)
   const updateNodePosition = useDesignStore((state) => state.updateNodePosition)
 
-  // Load mock data once on mount
+  const reactFlowWrapper = useRef(null)
+  const { screenToFlowPosition } = useReactFlow()
+
   useEffect(() => {
     setNodes(MOCK_NODES)
     setEdges(MOCK_EDGES)
@@ -57,8 +61,6 @@ function Canvas() {
     (changes) => {
       const updated = applyNodeChanges(changes, nodes)
       setNodes(updated)
-
-      // Keep store position data in sync when a node is dragged
       changes.forEach((change) => {
         if (change.type === 'position' && change.position) {
           updateNodePosition(change.id, change.position)
@@ -75,20 +77,56 @@ function Canvas() {
     [edges, setEdges]
   )
 
+  const onDragOver = useCallback((event) => {
+    event.preventDefault()
+    event.dataTransfer.dropEffect = 'move'
+  }, [])
+
+  const onDrop = useCallback(
+    (event) => {
+      event.preventDefault()
+      const serviceType = event.dataTransfer.getData('application/reactflow')
+      if (!serviceType) return
+
+      const position = screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY,
+      })
+
+      const newNode = {
+        id: `node-${Date.now()}`,
+        type: 'serviceNode',
+        position,
+        data: { serviceType, label: serviceType, config: {} },
+      }
+
+      addNode(newNode)
+    },
+    [screenToFlowPosition, addNode]
+  )
+
   return (
-    <div className="w-full h-screen">
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        nodeTypes={nodeTypes}
-        fitView
+    <div className="flex">
+      <Palette />
+      <div
+        className="w-full h-screen"
+        ref={reactFlowWrapper}
+        onDragOver={onDragOver}
+        onDrop={onDrop}
       >
-        <Background />
-        <Controls />
-        <MiniMap />
-      </ReactFlow>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          nodeTypes={nodeTypes}
+          fitView
+        >
+          <Background />
+          <Controls />
+          <MiniMap />
+        </ReactFlow>
+      </div>
     </div>
   )
 }
