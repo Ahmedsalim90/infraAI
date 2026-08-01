@@ -14,7 +14,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     const trimmedEmail = email.trim();
@@ -22,8 +22,8 @@ export default function Login() {
       setError("Enter your email and password.");
       return;
     }
-    setSubmitting(true);
-    const result = login(trimmedEmail, password);
+ setSubmitting(true);
+   const result = await login(trimmedEmail, password);
     setSubmitting(false);
     if (!result.ok) {
       setError(result.error ?? "Something went wrong. Try again.");

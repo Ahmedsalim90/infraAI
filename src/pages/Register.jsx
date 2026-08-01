@@ -12,11 +12,11 @@ export default function Register() {
   const [submitting, setSubmitting] = useState(false);
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setSubmitting(true);
-    const result = register(form.name, form.email, form.password);
+    const result = await register(form.name, form.email, form.password);
     setSubmitting(false);
     if (!result.ok) {
       setError(result.error ?? "Something went wrong. Try again.");
