@@ -46,7 +46,12 @@ def handle_join_project(data):
     project_presence[project_id].add(request.sid)
 
     print(f"Client {request.sid} joined project room: {project_id}")
-    emit("joined_project", {"project_id" : project_id})
+    current = project_designs.get(project_id, {"version": 0, "design": {}})
+    emit("joined_project", {
+        "project_id" : project_id,
+        "version": current["version"],
+        "design": current["design"]
+        })
 
     emit("presence_update", {
         "project_id": project_id,
