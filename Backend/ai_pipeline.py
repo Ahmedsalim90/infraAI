@@ -2,7 +2,7 @@ import os
 import json
 from openai import OpenAI
 from retrieve_context import retrieve_context
-
+from validate_design import validate_design
 DESIGN_SCHEMA_EXAMPLE = {
     "nodes": [
         {"id": "1", "type": "ec2", "label": "Web Server"},
@@ -59,6 +59,9 @@ def generate_design(prompt, query_embedding=None):
 
     raw_output = response.choices[0].message.content
     design = json.loads(raw_output)
+    is_valid, error = validate_design(design)
+    if not is_valid:
+        raise ValueError(f"AI generated an invalid design: {error}")
     return design
 
 if __name__ == "__main__":
