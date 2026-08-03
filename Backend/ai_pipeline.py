@@ -1,8 +1,12 @@
 import os
 import json
+from dotenv import load_dotenv
 from openai import OpenAI
 from retrieve_context import retrieve_context
 from validate_design import validate_design
+
+load_dotenv()
+
 DESIGN_SCHEMA_EXAMPLE = {
     "nodes": [
         {"id": "1", "type": "ec2", "label": "Web Server"},
@@ -26,6 +30,7 @@ Rules:
 - Do not include any text outside the JSON object.
 """
 
+
 def generate_design(prompt, query_embedding=None):
     """
     Takes a user's plain-language prompt, retrieves relevant reference
@@ -37,7 +42,10 @@ def generate_design(prompt, query_embedding=None):
     Miranda used for ingestion. For now, since that's not wired up yet,
     this can be passed in manually for testing.
     """
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    client = OpenAI(
+        api_key=os.getenv("OPENROUTER_API_KEY"),
+        base_url="https://openrouter.ai/api/v1"
+    )
 
     context_text = ""
     if query_embedding:
@@ -49,7 +57,7 @@ def generate_design(prompt, query_embedding=None):
         full_prompt = f"Relevant reference info:\n{context_text}\n\nUser request:\n{prompt}"
 
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="openai/gpt-4o-mini",
         response_format={"type": "json_object"},
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -59,10 +67,13 @@ def generate_design(prompt, query_embedding=None):
 
     raw_output = response.choices[0].message.content
     design = json.loads(raw_output)
+
     is_valid, error = validate_design(design)
     if not is_valid:
         raise ValueError(f"AI generated an invalid design: {error}")
+
     return design
+
 
 if __name__ == "__main__":
     fake_api_response = json.dumps(DESIGN_SCHEMA_EXAMPLE)
@@ -74,3 +85,8 @@ if __name__ == "__main__":
     # Prove retrieve_context() is correctly wired and reachable from here
     test_results = retrieve_context([1, 0, 0], top_k=1)
     print("\nretrieve_context() reachable, top result:", test_results[0]["content"])
+
+    # Real test: actually call the OpenRouter API for the first time
+    print("\n--- Testing real generate_design() call via OpenRouter ---")
+    real_design = generate_design("A simple web app with a database")
+    print("AI-generated design:", json.dumps(real_design, indent=2))
