@@ -1,0 +1,352 @@
+[
+  {
+    "title": "Amazon EC2",
+    "content": "EC2 provides resizable virtual machines (instances) in the cloud. You choose instance types based on CPU, memory, and network needs, and pay per second/hour of usage. EC2 supports auto scaling groups, spot instances for cost savings, and reserved instances for predictable workloads. It's the core compute building block for most AWS architectures.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon S3",
+    "content": "S3 is an object storage service for storing and retrieving any amount of data \u2014 files, backups, static assets, logs. It offers 99.999999999% durability, versioning, lifecycle policies to auto-archive or delete old objects, and fine-grained access control via bucket policies and IAM.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon RDS",
+    "content": "RDS is a managed relational database service supporting PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle. It automates backups, patching, and failover via Multi-AZ deployments, and supports read replicas to scale read-heavy workloads without managing database servers manually.",
+    "source": "AWS"
+  },
+  {
+    "title": "AWS Lambda",
+    "content": "Lambda runs code in response to events without provisioning servers \u2014 you're billed only for compute time used. It's ideal for short-lived tasks like image processing, API backends, or event-driven pipelines, and integrates with most AWS services as event sources.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon DynamoDB",
+    "content": "DynamoDB is a fully managed NoSQL key-value and document database designed for single-digit millisecond latency at any scale. It supports on-demand or provisioned capacity, global tables for multi-region replication, and is commonly used for high-throughput, low-latency applications.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon VPC",
+    "content": "A Virtual Private Cloud lets you provision a logically isolated network within AWS, with full control over IP ranges, subnets, route tables, and gateways. VPCs are the foundation for network security, separating public-facing resources from private backend systems.",
+    "source": "AWS"
+  },
+  {
+    "title": "AWS IAM",
+    "content": "Identity and Access Management controls who can access AWS resources and what actions they can perform. Best practice is least-privilege: granting only the permissions a user or service actually needs, using roles instead of long-lived credentials where possible.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon CloudFront",
+    "content": "CloudFront is AWS's content delivery network (CDN), caching content at edge locations worldwide to reduce latency for end users. It integrates with S3 and EC2 as origins, and supports HTTPS, custom domains, and DDoS protection via AWS Shield.",
+    "source": "AWS"
+  },
+  {
+    "title": "Elastic Load Balancing (ALB)",
+    "content": "The Application Load Balancer distributes incoming HTTP/HTTPS traffic across multiple targets (EC2 instances, containers, Lambda functions) in multiple Availability Zones. It supports path-based and host-based routing, health checks, and automatic scaling of backend capacity.",
+    "source": "AWS"
+  },
+  {
+    "title": "AWS Auto Scaling",
+    "content": "Auto Scaling automatically adjusts the number of EC2 instances (or other resources) based on demand, using scaling policies tied to metrics like CPU utilization or request count. This keeps applications responsive during traffic spikes while minimizing cost during low-demand periods.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon ECS",
+    "content": "Elastic Container Service is a fully managed container orchestration service for running Docker containers at scale. It supports both EC2-backed and serverless (Fargate) launch types, integrating with load balancers, IAM, and service discovery.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon EKS",
+    "content": "Elastic Kubernetes Service is AWS's managed Kubernetes offering, handling the control plane so teams can run standard Kubernetes workloads without managing master nodes. It integrates with IAM for pod-level permissions and supports Fargate for serverless pods.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon Route 53",
+    "content": "Route 53 is AWS's scalable DNS and domain registration service. It supports health checks, latency-based routing, geolocation routing, and failover routing, making it useful for directing traffic to the healthiest or nearest region.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon CloudWatch",
+    "content": "CloudWatch collects metrics, logs, and events from AWS resources, enabling monitoring, alarms, and automated actions (like triggering Auto Scaling). It's central to observability \u2014 most production AWS systems rely on it for dashboards and alerting.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon SNS",
+    "content": "Simple Notification Service is a pub/sub messaging service for sending notifications to subscribers (email, SMS, Lambda, SQS queues, HTTP endpoints). It's commonly used to fan out events to multiple downstream consumers simultaneously.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon SQS",
+    "content": "Simple Queue Service is a fully managed message queue that decouples producers and consumers, allowing systems to process work asynchronously and reliably. Standard queues offer at-least-once delivery; FIFO queues guarantee strict ordering and exactly-once processing.",
+    "source": "AWS"
+  },
+  {
+    "title": "Amazon API Gateway",
+    "content": "API Gateway lets you create, publish, and secure REST or WebSocket APIs at scale, handling authorization, throttling, and request/response transformation. It commonly sits in front of Lambda functions to build serverless APIs.",
+    "source": "AWS"
+  },
+  {
+    "title": "AWS CloudFormation",
+    "content": "CloudFormation is AWS's infrastructure-as-code service, letting you define resources in JSON/YAML templates and deploy them repeatably. It tracks resource dependencies and supports rollback if a deployment fails, making infrastructure changes safer and auditable.",
+    "source": "AWS"
+  },
+  {
+    "title": "AWS Secrets Manager",
+    "content": "Secrets Manager securely stores and rotates credentials like database passwords and API keys, removing the need to hardcode secrets in application code. It integrates with RDS for automatic credential rotation.",
+    "source": "AWS"
+  },
+  {
+    "title": "AWS KMS",
+    "content": "Key Management Service lets you create and control encryption keys used to protect data across AWS services. It supports automatic key rotation and detailed audit logging via CloudTrail for compliance requirements.",
+    "source": "AWS"
+  },
+  {
+    "title": "Google Compute Engine",
+    "content": "Compute Engine provides configurable virtual machines running in Google's data centers, with custom machine types, preemptible VMs for cost savings, and live migration during host maintenance to minimize downtime.",
+    "source": "GCP"
+  },
+  {
+    "title": "Google Cloud Storage",
+    "content": "Cloud Storage is a unified object storage service for unstructured data, offering multiple storage classes (Standard, Nearline, Coldline, Archive) to balance cost against access frequency, plus built-in lifecycle management and strong consistency.",
+    "source": "GCP"
+  },
+  {
+    "title": "Cloud SQL",
+    "content": "Cloud SQL is a managed relational database service supporting MySQL, PostgreSQL, and SQL Server, handling backups, replication, and patching automatically. It supports high-availability configurations and read replicas for scaling reads.",
+    "source": "GCP"
+  },
+  {
+    "title": "Cloud Functions",
+    "content": "Cloud Functions is Google's serverless compute offering, running single-purpose functions in response to events like HTTP requests, Pub/Sub messages, or storage changes, without needing to manage servers.",
+    "source": "GCP"
+  },
+  {
+    "title": "Firestore",
+    "content": "Firestore is a serverless NoSQL document database with real-time sync capabilities, commonly used in mobile and web apps that need live-updating data. It scales automatically and supports offline data access on clients.",
+    "source": "GCP"
+  },
+  {
+    "title": "Google Cloud VPC",
+    "content": "Google's Virtual Private Cloud provides global, scalable networking for GCP resources, letting you define subnets across regions within a single VPC, along with firewall rules and private connectivity to on-prem networks.",
+    "source": "GCP"
+  },
+  {
+    "title": "Google Cloud IAM",
+    "content": "Cloud IAM manages fine-grained access control across GCP resources using roles and policies. Best practice follows least-privilege principles, using predefined or custom roles scoped tightly to what a service account or user actually needs.",
+    "source": "GCP"
+  },
+  {
+    "title": "Cloud CDN",
+    "content": "Cloud CDN uses Google's global edge network to cache content close to users, reducing latency and origin load. It integrates directly with HTTP(S) load balancers and Cloud Storage.",
+    "source": "GCP"
+  },
+  {
+    "title": "Google Cloud Load Balancing",
+    "content": "Google's load balancing is a fully distributed, software-defined system that can handle global traffic without pre-warming, distributing load across regions and automatically scaling with demand.",
+    "source": "GCP"
+  },
+  {
+    "title": "Google Kubernetes Engine",
+    "content": "GKE is Google's managed Kubernetes service, offering both a standard mode (full node control) and Autopilot mode (fully managed nodes), simplifying container orchestration at scale.",
+    "source": "GCP"
+  },
+  {
+    "title": "Cloud Run",
+    "content": "Cloud Run runs stateless containers in a fully managed, serverless environment, automatically scaling from zero to handle traffic spikes. It's a middle ground between Cloud Functions and full Kubernetes deployments.",
+    "source": "GCP"
+  },
+  {
+    "title": "Cloud Monitoring",
+    "content": "Cloud Monitoring (formerly Stackdriver) provides visibility into the performance and health of GCP resources and applications, with dashboards, alerting policies, and uptime checks.",
+    "source": "GCP"
+  },
+  {
+    "title": "Google Cloud Pub/Sub",
+    "content": "Pub/Sub is a globally distributed messaging service that decouples event producers from consumers, supporting both push and pull delivery models, commonly used for event-driven architectures and streaming data pipelines.",
+    "source": "GCP"
+  },
+  {
+    "title": "Cloud Build",
+    "content": "Cloud Build is Google's CI/CD platform, executing builds as a series of steps defined in a configuration file, and integrating with container registries and deployment targets like GKE or Cloud Run.",
+    "source": "GCP"
+  },
+  {
+    "title": "Google Secret Manager",
+    "content": "Secret Manager securely stores API keys, passwords, and certificates, with automatic versioning and fine-grained IAM-based access control, replacing the need to store secrets in code or config files.",
+    "source": "GCP"
+  },
+  {
+    "title": "Azure Virtual Machines",
+    "content": "Azure VMs offer on-demand, scalable computing resources with a wide range of sizes and OS options. They support availability sets and availability zones to protect against hardware failures and datacenter outages.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure Blob Storage",
+    "content": "Blob Storage is Microsoft's object storage solution for unstructured data, offering Hot, Cool, and Archive access tiers to optimize cost based on how frequently data is accessed.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure SQL Database",
+    "content": "Azure SQL Database is a fully managed relational database service based on SQL Server, offering built-in high availability, automatic backups, and elastic scaling of compute and storage independently.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure Functions",
+    "content": "Azure Functions is Microsoft's serverless compute service, running event-driven code triggered by HTTP requests, timers, queues, or other Azure service events, billed based on execution time and resources used.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure Cosmos DB",
+    "content": "Cosmos DB is a globally distributed, multi-model database supporting document, key-value, graph, and column-family data, with single-digit millisecond latency and multiple consistency levels to balance performance and correctness.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure Virtual Network",
+    "content": "Azure VNet enables secure, isolated networking for Azure resources, supporting subnets, network security groups, and peering between VNets or hybrid connections to on-premises networks via VPN or ExpressRoute.",
+    "source": "Azure"
+  },
+  {
+    "title": "Microsoft Entra ID",
+    "content": "Microsoft Entra ID (formerly Azure Active Directory) is a cloud identity and access management service, providing single sign-on, multi-factor authentication, and conditional access policies for securing applications and resources.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure CDN",
+    "content": "Azure CDN caches static content at edge nodes around the world, reducing latency and offloading traffic from origin servers, with support for custom domains and HTTPS.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure Load Balancer",
+    "content": "Azure Load Balancer distributes inbound traffic across healthy VM instances within a region, operating at the transport layer (Layer 4) for high-throughput, low-latency load balancing.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure Kubernetes Service",
+    "content": "AKS is Azure's managed Kubernetes offering, handling the control plane automatically while giving teams control over worker nodes, integrated with Azure Monitor, Entra ID, and Azure networking.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure App Service",
+    "content": "App Service is a fully managed platform for building and hosting web apps and APIs, supporting multiple languages, built-in auto-scaling, deployment slots for staged rollouts, and integrated CI/CD.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure Monitor",
+    "content": "Azure Monitor collects and analyzes telemetry from Azure resources and applications, providing metrics, logs, alerts, and dashboards to maintain visibility into system health and performance.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure Service Bus",
+    "content": "Service Bus is a fully managed enterprise message broker supporting queues and publish/subscribe topics, used to decouple applications and reliably deliver messages even under high load.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure Key Vault",
+    "content": "Key Vault securely stores secrets, encryption keys, and certificates, with access controlled via Entra ID and detailed audit logging, commonly used to avoid hardcoding credentials in application code.",
+    "source": "Azure"
+  },
+  {
+    "title": "Azure DevOps Pipelines",
+    "content": "Azure Pipelines provides CI/CD automation, building, testing, and deploying code to any platform or cloud, with support for YAML-defined pipelines and integration with Azure Repos or GitHub.",
+    "source": "Azure"
+  },
+  {
+    "title": "Horizontal vs Vertical Scaling",
+    "content": "Vertical scaling adds more resources (CPU, RAM) to a single server, which is simple but has hard limits and a single point of failure. Horizontal scaling adds more servers/instances behind a load balancer, offering better fault tolerance and near-unlimited growth, at the cost of added architectural complexity (state management, session handling).",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "Load Balancing Strategies",
+    "content": "Common load balancing algorithms include round-robin (even distribution), least-connections (routes to the least busy server), and weighted distribution (accounts for server capacity differences). Health checks ensure traffic only reaches healthy instances, and sticky sessions can be used when a user needs to stay on the same backend.",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "Caching Strategies",
+    "content": "Caching reduces load on databases and improves latency by storing frequently accessed data in fast storage layers like Redis or Memcached. Common patterns include cache-aside (app checks cache, falls back to DB), write-through (writes go to cache and DB together), and TTL-based expiration to keep data reasonably fresh.",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "Database Read Replicas",
+    "content": "Read replicas are copies of a primary database that handle read-only queries, offloading traffic from the primary and improving read throughput. They introduce eventual consistency \u2014 replicas may lag slightly behind the primary \u2014 so they're best suited for read-heavy, latency-tolerant workloads.",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "Database Sharding",
+    "content": "Sharding splits a large database into smaller, independent pieces (shards), each holding a subset of data, typically partitioned by a key like user ID or region. It enables horizontal scaling beyond what a single database server can handle, but adds complexity for cross-shard queries and joins.",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "CDN Edge Caching",
+    "content": "CDNs cache static (and sometimes dynamic) content at edge locations physically close to users, reducing latency and offloading origin servers. This is especially effective for assets like images, videos, and JS/CSS bundles that don't change per-request.",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "Auto-Scaling Groups",
+    "content": "Auto-scaling groups automatically add or remove compute instances based on real-time metrics (CPU, request count, queue depth), keeping applications responsive under variable load while controlling cost during quiet periods. Scaling policies should account for instance startup time to avoid lagging behind sudden traffic spikes.",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "Queue-Based Load Leveling",
+    "content": "This pattern inserts a message queue between a producer and consumer, smoothing out traffic spikes by letting consumers process work at a sustainable rate rather than being overwhelmed by bursts. It also improves resilience \u2014 if the consumer goes down temporarily, messages simply wait in the queue.",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "Circuit Breaker Pattern",
+    "content": "A circuit breaker monitors calls to an external dependency and 'trips' (stops sending requests) after repeated failures, preventing cascading failures and giving the failing service time to recover. After a cooldown period, it allows a limited number of test requests through before fully closing again.",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "Blue-Green and Canary Deployments",
+    "content": "Blue-green deployment runs two identical production environments, switching traffic entirely from one to the other during a release, enabling instant rollback. Canary deployment instead rolls out a new version to a small percentage of traffic first, gradually increasing exposure while monitoring for errors before a full rollout.",
+    "source": "Scaling Patterns"
+  },
+  {
+    "title": "Principle of Least Privilege",
+    "content": "Every user, service, and role should be granted only the minimum permissions necessary to perform its function \u2014 nothing more. This limits the blast radius if credentials are compromised, and is a foundational practice across IAM systems on AWS, GCP, and Azure alike.",
+    "source": "Security Practices"
+  },
+  {
+    "title": "Encryption In Transit and At Rest",
+    "content": "Data should be encrypted both while moving across networks (in transit, via TLS/HTTPS) and while stored on disk (at rest, via provider-managed or customer-managed keys). Neglecting either leaves a gap \u2014 encrypted storage doesn't protect data sniffed off an unencrypted network connection, and vice versa.",
+    "source": "Security Practices"
+  },
+  {
+    "title": "Secrets Management",
+    "content": "Credentials, API keys, and certificates should never be hardcoded in source code or config files. Dedicated secrets managers (AWS Secrets Manager, GCP Secret Manager, Azure Key Vault) provide secure storage, access auditing, and automatic rotation.",
+    "source": "Security Practices"
+  },
+  {
+    "title": "Network Segmentation",
+    "content": "Splitting infrastructure into isolated network zones (public-facing, private application tier, database tier) limits how far an attacker can move if one layer is compromised. This is typically implemented via VPC subnets, security groups, and network ACLs across all major cloud providers.",
+    "source": "Security Practices"
+  },
+  {
+    "title": "Web Application Firewall (WAF)",
+    "content": "A WAF filters and monitors HTTP traffic to web applications, blocking common attack patterns like SQL injection and cross-site scripting before they reach the application layer. All three major clouds offer managed WAF services integrated with their CDN/load balancer products.",
+    "source": "Security Practices"
+  },
+  {
+    "title": "DDoS Protection",
+    "content": "Distributed Denial of Service protection absorbs and filters malicious traffic floods before they overwhelm application servers. Cloud providers offer baseline protection automatically, with advanced tiers (AWS Shield Advanced, Azure DDoS Protection, Google Cloud Armor) for larger-scale mitigation and cost protection guarantees.",
+    "source": "Security Practices"
+  },
+  {
+    "title": "Zero Trust Architecture",
+    "content": "Zero trust assumes no user or system is inherently trusted, even inside the network perimeter \u2014 every request must be authenticated and authorized based on identity and context, not just network location. This shifts security from a 'hard perimeter, soft interior' model to continuous verification everywhere.",
+    "source": "Security Practices"
+  },
+  {
+    "title": "Security Groups and Firewall Rules",
+    "content": "Security groups (AWS/Azure) and firewall rules (GCP) act as virtual firewalls controlling inbound and outbound traffic to specific resources. Best practice is to default-deny all traffic and explicitly allow only the specific ports/sources actually required.",
+    "source": "Security Practices"
+  },
+  {
+    "title": "Audit Logging",
+    "content": "Comprehensive audit logs (AWS CloudTrail, GCP Cloud Audit Logs, Azure Monitor Activity Log) record who did what and when across cloud resources, which is essential both for security investigations after an incident and for compliance requirements like SOC 2 or ISO 27001.",
+    "source": "Security Practices"
+  },
+  {
+    "title": "Multi-Factor Authentication",
+    "content": "MFA requires a second verification factor beyond a password \u2014 typically a mobile app code, hardware token, or biometric \u2014 significantly reducing the risk of account compromise from leaked or guessed credentials. It should be enforced for all privileged/admin accounts at minimum.",
+    "source": "Security Practices"
+  }
+]
