@@ -1,4 +1,4 @@
-﻿from flask import Flask
+from flask import Flask
 from flask_socketio import SocketIO
 from celery_app import celery
 
