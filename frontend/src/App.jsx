@@ -1,7 +1,12 @@
-import Canvas from './components/Canvas'
+import { BrowserRouter } from "react-router-dom";
+import Workspace from "./pages/Workspace";
 
 function App() {
-  return <Canvas />
+  return (
+    <BrowserRouter>
+      <Workspace />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

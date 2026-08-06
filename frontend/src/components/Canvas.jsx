@@ -7,7 +7,6 @@ import ReactFlow, {
   applyEdgeChanges,
 } from 'reactflow'
 import 'reactflow/dist/style.css'
-
 import useDesignStore from '../store/designStore'
 import ServiceNode from './ServiceNode'
 
@@ -47,7 +46,6 @@ function Canvas() {
   const setEdges = useDesignStore((state) => state.setEdges)
   const updateNodePosition = useDesignStore((state) => state.updateNodePosition)
 
-  // Load mock data once on mount
   useEffect(() => {
     setNodes(MOCK_NODES)
     setEdges(MOCK_EDGES)
@@ -57,8 +55,6 @@ function Canvas() {
     (changes) => {
       const updated = applyNodeChanges(changes, nodes)
       setNodes(updated)
-
-      // Keep store position data in sync when a node is dragged
       changes.forEach((change) => {
         if (change.type === 'position' && change.position) {
           updateNodePosition(change.id, change.position)
@@ -76,7 +72,7 @@ function Canvas() {
   )
 
   return (
-    <div className="w-full h-screen">
+   <div className="w-full h-full bg-slate-950">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -84,10 +80,19 @@ function Canvas() {
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         fitView
+        defaultEdgeOptions={{
+          style: { stroke: '#38bdf8', strokeWidth: 1.5 },
+          labelStyle: { fill: '#cbd5e1', fontSize: 11 },
+          labelBgStyle: { fill: '#0f172a' },
+        }}
       >
-        <Background />
-        <Controls />
-        <MiniMap />
+        <Background color="#334155" gap={20} />
+        <Controls className="!bg-slate-900 !border-slate-700 [&>button]:!bg-slate-900 [&>button]:!border-slate-700 [&>button]:!text-slate-300" />
+        <MiniMap
+          className="!bg-slate-900"
+          maskColor="rgba(15, 23, 42, 0.6)"
+          nodeColor="#38bdf8"
+        />
       </ReactFlow>
     </div>
   )
