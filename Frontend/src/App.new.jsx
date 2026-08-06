@@ -1,28 +1,24 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useCollabSocket } from './useCollabSocket'
-import './App.css'
+import { useMemo, useState } from 'react';
+import { useCollabSocket } from './useCollabSocket';
+import './App.css';
 
 function App() {
-  const roomId = 'infra-ai-room'
-  const { state, emitDesignUpdate, isConnected, isRemoteTyping, setTyping } = useCollabSocket(roomId)
-  const [draft, setDraft] = useState('')
+  const roomId = 'infra-ai-room';
+  const { state, emitDesignUpdate, isConnected, isRemoteTyping, setTyping } = useCollabSocket(roomId);
+  const [draft, setDraft] = useState('');
 
-  const nodeText = useMemo(() => state.nodes['node-1']?.content ?? '', [state.nodes])
-
-  useEffect(() => {
-    setDraft(nodeText)
-  }, [nodeText])
+  const nodeText = useMemo(() => state.nodes['node-1']?.content ?? '', [state.nodes]);
 
   const handleChange = (event) => {
-    const nextValue = event.target.value
-    setDraft(nextValue)
-    emitDesignUpdate({ nodeId: 'node-1', actor: 'human-user', value: nextValue, source: 'human', revision: (state.nodes['node-1']?.revision ?? 0) + 1 })
-    setTyping(true)
-  }
+    const nextValue = event.target.value;
+    setDraft(nextValue);
+    emitDesignUpdate({ nodeId: 'node-1', actor: 'human-user', value: nextValue, source: 'human', revision: (state.nodes['node-1']?.revision ?? 0) + 1 });
+    setTyping(true);
+  };
 
   const handleAiDemo = () => {
-    emitDesignUpdate({ nodeId: 'node-1', actor: 'ai-agent', value: `${draft || 'AI draft'} [AI generated]`, source: 'ai', revision: (state.nodes['node-1']?.revision ?? 0) + 1 })
-  }
+    emitDesignUpdate({ nodeId: 'node-1', actor: 'ai-agent', value: `${draft || 'AI draft'} [AI generated]`, source: 'ai', revision: (state.nodes['node-1']?.revision ?? 0) + 1 });
+  };
 
   return (
     <main className="app-shell">
@@ -40,7 +36,7 @@ function App() {
         </div>
       </section>
     </main>
-  )
+  );
 }
 
-export default App
+export default App;
