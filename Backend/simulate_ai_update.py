@@ -23,7 +23,7 @@ time.sleep(1)
 print("\nSimulating an AI-generated design (as if Kelly's Celery task emitted this)...")
 
 
-CURRENT_VERSION = 3
+CURRENT_VERSION = 0
 
 sio.emit("design_update", {
     "project_id": PROJECT_ID,

@@ -2,6 +2,10 @@ import eventlet
 eventlet.monkey_patch()
 
 import os
+from flask_jwt_extended import JWTManager
+from flask_migrate import Migrate
+from models_auth import db, User, Role
+from models import Project, ProjectMember
 from dotenv import load_dotenv
 from flask import Flask, request
 from flask_socketio import SocketIO, emit, join_room, leave_room
@@ -9,13 +13,28 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-change-later")
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-change-later")
+
+db.init_app(app)
+
+from routes_projects import projects_bp
+app.register_blueprint(projects_bp)
+
+from routes_auth import auth_bp
+app.register_blueprint(auth_bp, url_prefix="/auth")
+
+migrate = Migrate(app, db)
+jwt = JWTManager(app)
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
 
 socketio = SocketIO(app, cors_allowed_origins="*")
-#project presence and project designs are still in-memory for now when the redis will be ready we should remember to
-#  connect it for now is processing just one local project
+# project presence and project designs are still in-memory for now, when
+# the redis will be ready we should remember to connect it — for now is
+# processing just one local project
 project_presence = {}
 project_designs = {}
 
