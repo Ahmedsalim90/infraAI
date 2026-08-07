@@ -1,9 +1,9 @@
 # Infrastructure Design App
- 
+
 An AI-powered web platform that lets developers design, document, and collaborate on software architecture in real time. Users describe a system in plain language, and the AI generates and refines architecture diagrams alongside the team on a shared canvas.
- 
+
 ## Features
- 
+
 - **AI-assisted architecture generation** — describe a system in a prompt and get a generated diagram with documentation
 - **Human-in-the-loop editing** — review, edit, and approve AI-generated diagrams before finalizing
 - **Real-time collaboration** — multiple team members can view and edit the same diagram simultaneously, with live updates and notifications
@@ -11,9 +11,9 @@ An AI-powered web platform that lets developers design, document, and collaborat
 - **Version history** — track changes to diagrams over time
 - **Export & sharing** — export diagrams and documentation as images (PNG/JPG) or PDF
 - **User & access management** — authentication, roles, and project-level permissions (Editor, Viewer, Admin)
- 
+
 ## Tech stack
- 
+
 | Layer | Technology |
 |---|---|
 | Frontend | React.js, Tailwind CSS |
@@ -23,77 +23,83 @@ An AI-powered web platform that lets developers design, document, and collaborat
 | Media storage | Cloudinary |
 | AI integration | OpenAI API (prompt-to-diagram generation) |
 | Hosting | Vercel (frontend), Railway (backend) |
- 
+
 ## Architecture
- 
+
 The backend follows a **modular monolith** pattern — a single deployable service organized into internal modules:
- 
+
 - **Auth & user management** — registration, login, roles, and permissions
 - **AI generation** — turns prompts into diagrams and documentation
 - **Collaboration engine** — real-time sync between connected clients over WebSockets
 - **Diagram & version storage** — persists diagrams, nodes, edges, and version snapshots
 - **Export service** — generates shareable PNG/JPG/PDF output
- 
+
 See `/docs` for the full BRS, SRS, and TRS documents.
- 
+
 ## Getting started
- 
+
 ### Prerequisites
- 
+
 - Python 3.x
 - Node.js and npm
 - PostgreSQL
 - Cloudinary account (for media storage)
 - OpenAI API key
- 
+
 ### Backend setup
- 
+
 ```bash
 cd backend
 python -m venv venv
 source venv/bin/activate  # on Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
- 
+
 Create a `.env` file in `backend/` with:
- 
-```
 DATABASE_URL=postgresql://user:password@localhost:5432/infra_design_app
 OPENAI_API_KEY=your_openai_key
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 JWT_SECRET=your_jwt_secret
-```
- 
+
 Run the backend:
- 
+
 ```bash
-flask run
+python app.py
 ```
- 
+
 ### Frontend setup
- 
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
- 
+
 ## Project structure
- 
-```
+
 .
-├── backend/          # Flask API, auth, AI generation, collaboration engine
-├── frontend/          # React + Tailwind CSS client
-├── docs/              # BRS, SRS, TRS documentation
+├── backend/ # Flask API, auth, AI generation, collaboration engine
+├── frontend/ # React + Tailwind CSS client
+├── docs/ # BRS, SRS, TRS documentation
 └── README.md
-```
- 
+
+> Note: folder structure should be consistent across all branches. If `frontend/` and `backend/` ever diverge in location, fix this before merging — inconsistent structure breaks `npm install` / `pip install` for teammates.
+
+## Branching workflow
+
+- `main` — always represents a working, runnable combination of frontend + backend.
+- Feature branches should be short-lived — merge into `main` as soon as a piece is stable, not at the end of the whole feature.
+- Before merging, confirm the app still runs end-to-end (`npm run dev` + backend server) with your changes included.
+- Pull latest `main` into your branch regularly to avoid large, painful merges later.
+
 ## Contributing
- 
+
 This project is being built as part of a team software engineering internship. Pull requests should target the `dev` branch and pass the existing test suite before merge.
- 
+
 ## License
- 
+
 GPL-3.0 license
+
+
