@@ -9,9 +9,12 @@ from models import Project, ProjectMember
 from dotenv import load_dotenv
 from flask import Flask, request
 from flask_socketio import SocketIO, emit, join_room, leave_room
+from flask_cors import CORS
+from datetime import timedelta
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-secret-change-later")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -25,13 +28,20 @@ app.register_blueprint(projects_bp)
 from routes_auth import auth_bp
 app.register_blueprint(auth_bp, url_prefix="/auth")
 
+from routes_ai import ai_bp
+app.register_blueprint(ai_bp)
+
+from routes_comments import comments_bp
+app.register_blueprint(comments_bp)
+
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=24)
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
 
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", message_queue=REDIS_URL)
 # project presence and project designs are still in-memory for now, when
 # the redis will be ready we should remember to connect it — for now is
 # processing just one local project
